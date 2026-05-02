@@ -48,3 +48,12 @@ jobs:
         run: |
           # This securely pushes the code to Databricks and updates the Job
           databricks bundle deploy -t prod
+
+      - name: Run the Job in Databricks
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+        run: |
+          # This triggers the job to actually run after deploying
+          databricks bundle run -t prod daily_sales_pipeline_job
