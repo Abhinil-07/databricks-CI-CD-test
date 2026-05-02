@@ -19,7 +19,7 @@ def create_schemas():
     spark.sql("CREATE SCHEMA IF NOT EXISTS test.sales")
     spark.sql("CREATE SCHEMA IF NOT EXISTS test.product")
     
-    print(" Schemas `test.sales` and `test.product` created successfully!")
+    print(" Schemas `test.sales` and `test.product` created successfully with service principals!")
 
 if __name__ == "__main__":
     create_schemas()
