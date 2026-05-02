@@ -1,0 +1,17 @@
+# Environment variables and secrets
+.env
+
+# Python virtual environments
+.venv/
+env/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Databricks specific
+.databricks/

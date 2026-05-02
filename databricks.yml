@@ -1,0 +1,35 @@
+bundle:
+  name: ecommerce-pipeline-bundle
+
+# Define the targets (environments)
+# Usually, dev uses a personal workspace and prod uses the production workspace.
+# For now, we are pointing both to your current workspace URL.
+targets:
+  dev:
+    # 'dev' is the default target when developers run `databricks bundle deploy` locally
+    default: true
+    workspace:
+      host: https://dbc-de83ecc2-9f60.cloud.databricks.com
+  
+  prod:
+    # 'prod' is the target our GitHub Action will deploy to
+    workspace:
+      host: https://dbc-de83ecc2-9f60.cloud.databricks.com
+
+# Define the Databricks Jobs
+resources:
+  jobs:
+    daily_sales_pipeline_job:
+      name: "Ecommerce Sales Pipeline [${bundle.target}]"
+      tasks:
+        - task_key: run_pipeline
+          spark_python_task:
+            python_file: ./main.py
+          
+          # This configures the job to run instantly on Databricks Serverless Compute!
+          environment_key: serverless
+      
+      environments:
+        - environment_key: serverless
+          spec:
+            client_config: {}
