@@ -17,10 +17,12 @@ resources:
       name: "Ecommerce Sales Pipeline [${bundle.target}]"
       tasks:
         - task_key: run_pipeline
-          spark_python_task:
-            python_file: ./main.py
+          notebook_task:
+            notebook_path: ./main.py
           environment_key: "default"
       environments:
         - environment_key: "default"
           spec:
             client: "1"
+            dependencies:
+              - python-dotenv
