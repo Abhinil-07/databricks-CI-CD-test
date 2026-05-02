@@ -6,6 +6,15 @@ targets:
     default: true
     workspace:
       host: https://dbc-de83ecc2-9f60.cloud.databricks.com
+    resources:
+      jobs:
+        daily_sales_pipeline_job:
+          environments:
+            - environment_key: "default"
+              spec:
+                client: "1"
+                dependencies:
+                  - python-dotenv
 
   prod:
     workspace:
@@ -18,11 +27,10 @@ resources:
       tasks:
         - task_key: run_pipeline
           spark_python_task:
-            python_file: /Workspace/${workspace.file_path}/main.py
+            python_file: ${workspace.file_path}/main.py
           environment_key: "default"
       environments:
         - environment_key: "default"
           spec:
-            client: "1"
             dependencies:
               - python-dotenv
